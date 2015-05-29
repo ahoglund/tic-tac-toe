@@ -7,7 +7,7 @@
    enter the index # corresponding to the board.
    index is like so:
 
-     1 | 2 | 3
+      1 | 2 | 3
       ---------
       4 | 5 | 6
       ---------
