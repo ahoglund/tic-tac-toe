@@ -44,7 +44,7 @@ module TicTacToe
       # since its a pretty small list, just hardcoding the possible
       # win combinations.  If for some reason this game were to be expanded to more rows/colums
       # then actual logic would need to be implemented here.
-      @winning_ranges = [[0,1,2],[3,4,5],[6,7,8],[0,3,6]]#,[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+      @winning_ranges = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
     end
 
@@ -67,15 +67,13 @@ module TicTacToe
     end
 
     def check_for_win(mark)
+      won = false
       @winning_ranges.each do |winning_range|
         win = 0
         winning_range.each { |r| win += 1 if @cells[r][:mark] == mark }
-        if win == 3 
-          return true 
-        else
-          return false
-        end
+        won = true if win == 3
       end
+      return won
     end
   end
 
@@ -91,6 +89,7 @@ module TicTacToe
         player = @turn % 2 == 0 ? @players[0] : @players[1]
         if @board.moves == 9 && ! @board.check_for_win(player[:mark])
           puts "Draw"
+          @board.draw
           return
         end
         @board.draw
