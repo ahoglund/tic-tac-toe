@@ -29,12 +29,7 @@ module TicTacToe
 
   class Board
 
-    attr_reader :moves
-
     def initialize
-      # used to track game loop.
-      @moves          = 0
-      
       # create a finite set of cells, and default their 'mark' to the a #.
       # later in the program the integer'ness of a cell is used to determine if its
       # take or not.  In other words, if a cell contains an integer as its 'mark' then
@@ -63,7 +58,6 @@ module TicTacToe
 
     def place_move(move, mark)
       @cells[move.to_i - 1][:mark] = mark 
-      @moves += 1
     end
 
     def check_for_win(mark)
@@ -78,6 +72,7 @@ module TicTacToe
   end
 
   class Game
+
     def initialize
       @turn       = 0
       @board      = TicTacToe::Board.new
@@ -85,31 +80,65 @@ module TicTacToe
     end
 
     def start
-      while @board.moves <= 9
-        player = @turn % 2 == 0 ? @players[0] : @players[1]
-        if @board.moves == 9 && ! @board.check_for_win(player[:mark])
+      while @turn <= 9
+
+        # determine draw
+        if is_a_draw?
           puts "Draw"
           @board.draw
           return
         end
+
+        # game play
         @board.draw
-        print "#{player[:name]} Player's Move: "
+        print "#{current_player[:name]} Player's Move: "
         move = gets
-        if @board.check_move(move, player[:mark])
-          @board.place_move(move, player[:mark])
-          @turn += 1
+
+        if @board.check_move(move, current_player[:mark])
+          @board.place_move(move, current_player[:mark])
+          # check for winning move
+          if @board.check_for_win(current_player[:mark])
+            puts "#{current_player[:name]} Player Wins!"
+            @board.draw
+            print "Play Again? (Y|N) "
+            if play_again?(gets)
+              TicTacToe::Game.new.start 
+            else
+              exit
+            end
+          else
+            increment_turn
+          end
+
         else
           print "Invalid Entry! (must be 1-9 and not taken already)\n"
         end
-        if @board.check_for_win(player[:mark])
-          puts "#{player[:name]} Player Wins!"
-          @board.draw
-          return
-        end
+
       end
+    end
+
+    private
+
+    def increment_turn
+      @turn += 1
+    end
+
+    def is_a_draw?
+      @turn == 9 && ! @board.check_for_win(current_player[:mark])
+    end
+
+    def play_again?(input)
+      if input.strip =~ /Y/
+        return true
+      elsif input.strip =~ /N/
+        return false
+      end
+    end
+
+    def current_player
+      @turn % 2 == 0 ? @players[0] : @players[1]
     end
   end
 end
 
-game = TicTacToe::Game.new
-game.start
+TicTacToe::Game.new.start
