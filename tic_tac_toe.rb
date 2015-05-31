@@ -86,38 +86,44 @@ module TicTacToe
         if is_a_draw?
           puts "Draw"
           @board.draw
-          return
+          reset
         end
 
         # game play
         @board.draw
-        print "#{current_player[:name]} Player's Move: "
-        move = gets
-
-        if @board.check_move(move, current_player[:mark])
-          @board.place_move(move, current_player[:mark])
-          # check for winning move
-          if @board.check_for_win(current_player[:mark])
-            puts "#{current_player[:name]} Player Wins!"
-            @board.draw
-            print "Play Again? (Y|N) "
-            if play_again?(gets)
-              TicTacToe::Game.new.start 
-            else
-              exit
-            end
-          else
-            increment_turn
-          end
-
-        else
-          print "Invalid Entry! (must be 1-9 and not taken already)\n"
-        end
-
+        play
       end
     end
 
     private
+
+    def play
+      print "#{current_player[:name]} PlPayer's Move: "
+      move = gets
+      if @board.check_move(move, current_player[:mark])
+        @board.place_move(move, current_player[:mark])
+        # check for winning move
+        if @board.check_for_win(current_player[:mark])
+          puts "#{current_player[:name]} Player Wins!"
+          @board.draw
+          reset
+        else
+          increment_turn
+        end
+
+      else
+        print "Invalid Entry! (must be 1-9 and not taken already)\n"
+      end
+    end
+
+    def reset
+      print "Play Again? (Y|N) "
+      if play_again?(gets)
+        TicTacToe::Game.new.start 
+      else
+        exit
+      end
+    end
 
     def increment_turn
       @turn += 1
