@@ -29,10 +29,7 @@ module TicTacToe
   #   def initialize
   #   end
   # end
-
   def self.new_game
     TicTacToe::Game.new.start
   end
 end
-
-TicTacToe.new_game
