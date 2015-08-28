@@ -14,3 +14,7 @@ end
 get '/' do
   "Yo!"
 end
+
+get '/gwell' do 
+	"bell"
+end
