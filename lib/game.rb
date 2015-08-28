@@ -13,19 +13,19 @@ module TicTacToe
         # determine draw
         if is_a_draw?
           # puts "Draw"
-          @board.draw
+          #@board.draw
           reset_game
         end
 
         # game play
-        @board.draw
+        #@board.draw
         play
       end
     end
 
     private
 
-    def play
+    def play(move: 1)
       # print "#{current_player[:name]} PlPayer's Move: "
       # move = gets
       if @board.check_move(move, current_player[:mark])
@@ -33,7 +33,7 @@ module TicTacToe
         # check for winning move
         if @board.check_for_win(current_player[:mark])
           # puts "#{current_player[:name]} Player Wins!"
-          @board.draw
+         # @board.draw
           reset_game
         else
           increment_turn
@@ -73,5 +73,5 @@ module TicTacToe
       @turn % 2 == 0 ? @players[0] : @players[1]
     end
   end
-  end
+end
   

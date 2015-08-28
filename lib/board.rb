@@ -14,11 +14,9 @@ module TicTacToe
       @winning_ranges = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     end
 
-    def draw
-      print "\n"
-      @cells.each_with_index { |e,i| print (i + 1) % 3 == 0 ? "#{e[:mark]} \n"  : "#{e[:mark]} | " }
-      print "\n"
-    end
+    # def draw
+    #   @cells.each_with_index { |e,i| (i + 1) % 3 == 0 ? "#{e[:mark]} \n"  : "#{e[:mark]} | " }
+    # end
 
     # check the range and also
     # check that the mark for the chosen cell 

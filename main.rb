@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require './tic_tac_toe'
 
 configure :production do
   # Configure stuff here you'll want to
@@ -10,11 +11,9 @@ configure :production do
 end
 
 
+
 # Quick test
 get '/' do
-  "Yo!"
-end
-
-get '/gwell' do 
-	"bell"
+	@game = TicTacToe::Game.new
+  erb :index
 end

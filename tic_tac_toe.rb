@@ -1,5 +1,5 @@
-require_relative 'lib/game'
-require_relative 'lib/board'
+require './lib/game'
+require './lib/board'
 
 module TicTacToe
   # game description
@@ -24,12 +24,4 @@ module TicTacToe
   # 1. a player wins
   # 2. the board is full and no win (Draw)
   # 3. (is there a way to determine draw before board is full?
-
-  # class Player
-  #   def initialize
-  #   end
-  # end
-  def self.new_game
-    TicTacToe::Game.new.start
-  end
 end
