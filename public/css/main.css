@@ -33,7 +33,9 @@ body {
 }
 
 
-
+.tile-content {
+  font-size: 130px;
+}
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
@@ -53,7 +55,7 @@ code {
   padding: 0px;
   margin: 0px;
 }
-#gameboard li {
+#gameboard li a {
   float: left;
   margin: 0px;
   width: 33.3333%;

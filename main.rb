@@ -10,10 +10,21 @@ configure :production do
   #       from ENV['DATABASE_URI'] (see /env route below)
 end
 
-
+enable :sessions
 
 # Quick test
 get '/' do
-	@game = TicTacToe::Game.new
+  @game = TicTacToe::Game.new
+  session[:player] = @game.current_player
+  @current_player = session[:player]
   erb :index
+end
+
+get '/game/new' do 
+  @game = TicTacToe::Game.new
+  session[:player] = @game.current_player
+end
+
+get '/move/:player' do
+  session[:player] = params[:player]
 end

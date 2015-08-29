@@ -20,12 +20,17 @@
   <body>
     <div class="container">
       <div class="page-header">
-        <button type="button" class="btn btn-primary pull-right">New Game</button>
+        <button id="new-game" type="button" class="btn btn-primary pull-right">New Game</button>
         <h1>Tic Tac Toe</h1>
       </div>
       <ul id="gameboard">
       	<% (1..9).each do |i| %>
-      	 <li><span class="glyphicon glyphicon-asterisk"></span></li>
+      	 <li>
+           <a class="btn btn-default tile" type="button" data-tile-id="<%= i %>" data-player="<%= @current_player.name %>">
+             <span class="tile-content">
+             </span>
+           </a>
+         </li>
       	 <% end %>
       </ul>
     </div>
@@ -37,5 +42,6 @@
     </footer>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
