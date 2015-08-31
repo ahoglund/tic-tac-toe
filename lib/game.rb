@@ -8,8 +8,14 @@ module TicTacToe
       @player_two    = TicTacToe::Player.new("Second","O")
     end
 
+    attr_reader :turn
+    
     def current_player
       @turn % 2 == 0 ? @player_one : @player_two
+    end
+
+    def next_player(current_turn:)
+      current_turn % 2 == 0 ? @player_two : @player_one
     end
 
     def start
@@ -22,9 +28,7 @@ module TicTacToe
         play
       end
     end
-def name
-  'Tic Tac Toe'
-end
+
     private
 
     def play(move: 1)

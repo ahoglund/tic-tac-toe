@@ -23,10 +23,13 @@
         <button id="new-game" type="button" class="btn btn-primary pull-right">New Game</button>
         <h1>Tic Tac Toe</h1>
       </div>
+            <div id="player-information" class="alert alert-info" role="alert" data-turn="<%= @turn %>" data-mark="<%= @current_player.mark %>">
+       <p class="text-center"><%= @current_player.mark %>'s turn.</p>
+      </div>
       <ul id="gameboard">
       	<% (1..9).each do |i| %>
       	 <li>
-           <a class="btn btn-default tile" type="button" data-tile-id="<%= i %>" data-player="<%= @current_player.name %>">
+           <a class="btn btn-default tile" type="button" data-tile-id="<%= i %>">
              <span class="tile-content">
              </span>
            </a>
@@ -34,7 +37,6 @@
       	 <% end %>
       </ul>
     </div>
-
     <footer class="footer">
       <div class="container">
         <p class="text-muted text-center">Copyright <span class="glyphicon glyphicon-copyright-mark"></span> 2015 Andrew Hoglund</p>
